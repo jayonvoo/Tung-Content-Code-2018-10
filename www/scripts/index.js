@@ -1985,7 +1985,9 @@
         } else if (pCategory == 100) {
             return 1;
         }
-    }
+    }  
+
+
 
     function GetAppCategoryOnly(pCategory) {
         var rPackageName = "";
