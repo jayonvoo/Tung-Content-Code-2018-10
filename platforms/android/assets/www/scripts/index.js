@@ -283,7 +283,7 @@
             e.preventDefault();
         }, false);
 
-        //BindIconItem(1);
+        BindIconItem(1);
         BindIconItem(2);
 
         GetDeviceInfo();/** 裝置Id功能 */
@@ -342,7 +342,7 @@
                     isMarqueeFirstTime = false;
                 }
 
-                //BindIconItem(1);
+                BindIconItem(1);
                 BindIconItem(2);
             }
         }, 1000);
@@ -1513,7 +1513,7 @@
 
     function BindIconItem(pArea) {
 
-        var testValue = "生活資訊$Life.png$3@辨識安全$Security.png$5@院內服務$Service.png$2@環境控制$smart-home.png$100";
+        //var testValue = "生活資訊$Life.png$3@辨識安全$Security.png$5@院內服務$Service.png$2@環境控制$smart-home.png$100";
 
         ClearTableContent();
         $.ajax({
@@ -1527,8 +1527,8 @@
                         CustomAlert("無法從院方Server取得IconItem");
                     }
                 } else {
-                    var ItemData = testValue.split("@");
-                    for (var i = 0; i < ItemData.length; i++) {
+                    var ItemData = response.split("@");
+                    for (var i = 0; i < ItemData.length - 1; i++) {
                         var CategoryName = ItemData[i].split("$")[0];
                         var CategoryImage = ItemData[i].split("$")[1];
                         var CategoryId = ItemData[i].split("$")[2];
@@ -1592,8 +1592,8 @@
                             }
                             $("#RightTable td").each(function (index) {
                                 if ($(this).html().trim() == '') {
-                                    //var newImg = "<img id='" + CategoryImage + "' src='http://122.117.67.226:5388/CategoryImage" + "/" + CategoryImage + "' class='Icon' /><br/>";
-                                    var newImg = "<img id='" + CategoryImage + "' src='images" + "/" + CategoryImage + "' class='Icon' /><br/>";
+                                    var newImg = "<img id='" + CategoryImage + "' src='http://122.117.67.226:5388/CategoryImage" + "/" + CategoryImage + "' class='Icon' /><br/>";
+                                    //var newImg = "<img id='" + CategoryImage + "' src='images" + "/" + CategoryImage + "' class='Icon' /><br/>";
                                     var newSpan = "<span class='NormalColor1' >" + CategoryName + "</>";
                                     $(this).append(newImg);
                                     $(this).append(newSpan);
@@ -1974,20 +1974,14 @@
     }
 
     function GetAppCategoryCount(pCategory) {
-        if (pCategory != 100) {
-            var rCount = 0;
-            for (var j = 0; j < ApplicationData.length; j++) {
-                if (ApplicationData[j].split(",")[3] == pCategory) {
-                    rCount++;
-                }
+        var rCount = 0;
+        for (var j = 0; j < ApplicationData.length; j++) {
+            if (ApplicationData[j].split(",")[3] == pCategory) {
+                rCount++;
             }
-            return rCount;
-        } else if (pCategory == 100) {
-            return 1;
         }
-    }  
-
-
+        return rCount;
+    }
 
     function GetAppCategoryOnly(pCategory) {
         var rPackageName = "";
