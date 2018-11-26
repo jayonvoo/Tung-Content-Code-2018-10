@@ -305,7 +305,7 @@
             /** 2017-04-20*/
 
             if (UpdateCount == 60) {
-                /*cmd
+                
                 UpdateCount = 0;
                 DoCheckUpdate();
                 //BindMarqueeText();
@@ -320,7 +320,7 @@
                 } else {
                     ReConnectLastFineWifi();
                 }
-                */
+                
             }
 
             if (UpdateCount == 20) {
