@@ -107,6 +107,7 @@
     var isInnerBox;
     var isAppOpen;
     var getLastKey;
+    var getLastLabel;
     //---------------------------------------------------------------------------------------------------------------
     function CheckIsTryEnd() {
         /** 2017-04-20*/
@@ -283,7 +284,7 @@
             e.preventDefault();
         }, false);
 
-        BindIconItem(1);
+       //BindIconItem(1);
         BindIconItem(2);
 
         GetDeviceInfo();/** 裝置Id功能 */
@@ -342,7 +343,7 @@
                     isMarqueeFirstTime = false;
                 }
 
-                BindIconItem(1);
+                //BindIconItem(1);
                 BindIconItem(2);
             }
         }, 1000);
@@ -1202,13 +1203,13 @@
             }
             getLastKey = 40;
 
-            if (innerItem == 11) {
+            if (getLastLabel == "院內服務") {
                 if (innerItemPosition != 11) {
                     innerItemPosition += 5;
                 } if (innerItemPosition > 11) {
                     innerItemPosition = 11;
                 }
-            } else if (innerItem == 5 || innerItem == 4) {
+            } else if (getLastLabel == "生活資訊") {
                 if (!(innerItemPosition > 5)) {
                     $('.TableCellBig').first().focus();
                     innerItemPosition = 1;
@@ -1237,11 +1238,11 @@
             }
             getLastKey = 39;
 
-            if (innerItem == 5 || innerItem == 4) {
-                if (innerItemPosition < 5) {
+            if (getLastLabel == "生活資訊") {
+                if (innerItemPosition < innerItem) {
                     innerItemPosition += 1;
                 }
-            } else if (innerItem == 11) {
+            } else if (getLastLabel == "院內服務") {
                 if (innerItemPosition != 5) {
                     if (innerItemPosition != 10) {
                         if (innerItemPosition != 11) {
@@ -1256,7 +1257,7 @@
             if ($('#ModalImage').is(":visible")) {  //判斷彈出視窗顯示狀態
 
                 //給與"OK"鍵啓動指定app
-                if (innerItem == 5 || innerItem == 4) {
+                if (getLastLabel == "生活資訊") {
                     switch (innerItemPosition) {
                         case 1:
                             window.plugins.launcher.launch({ packageName: 'com.bcbs.foodgallery' }, successCallback, errorCallback);
@@ -1266,7 +1267,7 @@
                             window.plugins.launcher.launch({ packageName: 'com.v8.view.add.octoreach.galleryjojogo' }, successCallback, errorCallback);
                             isAppOpen = true;
                             break;
-                        case 5:
+                        case 3:
                             if (PatientBedId == '2121') {
                                 window.plugins.launcher.launch({ packageName: 'com.example.user.tung_environmental_control_2121_44' }, successCallback, errorCallback);
                             } else if (PatientBedId == '2122') {
@@ -1276,7 +1277,7 @@
                             break;
                     }
 
-                } else if (innerItem == 11) {
+                } else if (getLastLabel == "院內服務") {
                     switch (innerItemPosition) {
                         case 1:
                             window.plugins.launcher.launch({ packageName: 'com.bc.teachrule' }, successCallback, errorCallback);
@@ -1577,6 +1578,8 @@
                                                 $('#ModalImage').show();
                                                 isModalShow = true;
                                                 BindApplicationModal(data.cId);
+
+                                                getLastLabel = data.cText;
                                             } else {
                                                 if (category1Count > 0 && isModalShow == false) {
                                                     var runPackage1 = GetAppCategoryOnly(data.cId);
@@ -1629,6 +1632,7 @@
                                                 innerItemPosition = 1;
                                                 BindApplicationModal(data.cId);
 
+                                                getLastLabel = data.cText;
                                                 $('.TableCellBig').first().focus(); //指定focus到彈出視窗内
 
                                             } else {
@@ -2074,17 +2078,20 @@
                     innerItemPosition = 1;
 
                 } else if (getLastKey == 39) { //RIGHT_FOCUS
-                    if (innerItemPosition == 5 && innerItem == 4) {
-                        $('.TableCellBig').focus();
-                        innerItemPosition = 4;
-                    } else if (innerItemPosition == 11 && innerItem == 11) {
+                    if (getLastLabel == "生活資訊") {
+                        if (innerItemPosition == innerItem) {
+                            $('.TableCellBig').focus();
+                            innerItemPosition = innerItem;
+                        }
+
+                    } else if (innerItemPosition == innerItem && getLastLabel == "院內服務") {
                         $('.TableCellBig').focus();
                     }
                 } else if (getLastKey == 38) { //UP_FOCUS
                     if (innerItemPosition == 1) {
                         $('.TableCellBig').first().focus();
                     }
-                } else if (getLastKey == 40 && (innerItem == 5 || innerItem == 4)) { //DOWN_FOCUS
+                } else if (getLastKey == 40 && getLastLabel == "生活資訊") { //DOWN_FOCUS
                     $('.TableCellBig').first().focus();
                 }
             }
