@@ -305,7 +305,7 @@
             /** 2017-04-20*/
 
             if (UpdateCount == 60) {
-                
+
                 UpdateCount = 0;
                 DoCheckUpdate();
                 //BindMarqueeText();
@@ -320,7 +320,7 @@
                 } else {
                     ReConnectLastFineWifi();
                 }
-                
+
             }
 
             if (UpdateCount == 20) {
@@ -1208,6 +1208,11 @@
                 } if (innerItemPosition > 11) {
                     innerItemPosition = 11;
                 }
+            } else if (innerItem == 5 || innerItem == 4) {
+                if (!(innerItemPosition > 5)) {
+                    $('.TableCellBig').first().focus();
+                    innerItemPosition = 1;
+                }
             }
 
         } else if (event.keyCode == 37) { //LEFT
@@ -1232,8 +1237,8 @@
             }
             getLastKey = 39;
 
-            if (innerItem == 2) {
-                if (innerItemPosition < 2) {
+            if (innerItem == 5 || innerItem == 4) {
+                if (innerItemPosition < 5) {
                     innerItemPosition += 1;
                 }
             } else if (innerItem == 11) {
@@ -1249,15 +1254,26 @@
 
         } else if (event.keyCode == 13) {
             if ($('#ModalImage').is(":visible")) {  //判斷彈出視窗顯示狀態
-                if (innerItem == 2) {
 
-                    //給與"OK"鍵啓動指定app
-                    if (innerItemPosition == 1) {
-                        window.plugins.launcher.launch({ packageName: 'com.bcbs.foodgallery' }, successCallback, errorCallback);
-                        isAppOpen = true;
-                    } else if (innerItemPosition == 2) {
-                        window.plugins.launcher.launch({ packageName: 'com.v8.view.add.octoreach.galleryjojogo' }, successCallback, errorCallback);
-                        isAppOpen = true;
+                //給與"OK"鍵啓動指定app
+                if (innerItem == 5 || innerItem == 4) {
+                    switch (innerItemPosition) {
+                        case 1:
+                            window.plugins.launcher.launch({ packageName: 'com.bcbs.foodgallery' }, successCallback, errorCallback);
+                            isAppOpen = true;
+                            break;
+                        case 2:
+                            window.plugins.launcher.launch({ packageName: 'com.v8.view.add.octoreach.galleryjojogo' }, successCallback, errorCallback);
+                            isAppOpen = true;
+                            break;
+                        case 5:
+                            if (PatientBedId == '2121') {
+                                window.plugins.launcher.launch({ packageName: 'com.example.user.tung_environmental_control_2121_44' }, successCallback, errorCallback);
+                            } else if (PatientBedId == '2122') {
+                                window.plugins.launcher.launch({ packageName: 'com.example.user.tung_environmental_control_2122_44' }, successCallback, errorCallback);
+                            }
+                            isAppOpen = true;
+                            break;
                     }
 
                 } else if (innerItem == 11) {
@@ -2058,8 +2074,9 @@
                     innerItemPosition = 1;
 
                 } else if (getLastKey == 39) { //RIGHT_FOCUS
-                    if (innerItemPosition == 2 && innerItem == 2) {
+                    if (innerItemPosition == 5 && innerItem == 4) {
                         $('.TableCellBig').focus();
+                        innerItemPosition = 4;
                     } else if (innerItemPosition == 11 && innerItem == 11) {
                         $('.TableCellBig').focus();
                     }
@@ -2067,6 +2084,8 @@
                     if (innerItemPosition == 1) {
                         $('.TableCellBig').first().focus();
                     }
+                } else if (getLastKey == 40 && (innerItem == 5 || innerItem == 4)) { //DOWN_FOCUS
+                    $('.TableCellBig').first().focus();
                 }
             }
         });
