@@ -1434,11 +1434,13 @@
         /** 2017-04-20*/
         console.log("呼叫BindApplication");
         console.log("myDeviceId:" + myDeviceId);
+        myDeviceId = '2122';
         /** 2017-04-20*/
         $.ajax({
             url: "http://122.117.67.226:5388/QueryApplication.aspx",
             type: "get",
-            data: { SiteId: 1, DeviceId: myDeviceId },
+            //data: { SiteId: 1, DeviceId: myDeviceId },
+            data: { SiteId: 1, DeviceId: PatientBedId },
             dataType: 'text',
             success: function (response) {
                 if (response.trim() == "") {
