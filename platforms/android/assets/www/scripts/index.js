@@ -284,13 +284,14 @@
             e.preventDefault();
         }, false);
 
-       //BindIconItem(1);
+        //BindIconItem(1);
         BindIconItem(2);
 
         GetDeviceInfo();/** 裝置Id功能 */
         GetHospitalData();
         installedApps.getPackages(GetInstallListSuccess, GetInstallListFail);
         BindApplication();
+
 
         /* 2017-07-29 Testing Download APK And Install on Launcher */
         //PushDownloadFile("http://122.117.67.226:5388/Upload/sign5/2017-06-04-13-18-02.apk");
@@ -304,7 +305,7 @@
             /** 2017-04-20*/
             //console.log("計時器秒數:"+UpdateCount);
             /** 2017-04-20*/
-
+            DoCheckUpdate();
             if (UpdateCount == 60) {
 
                 UpdateCount = 0;
@@ -1204,10 +1205,11 @@
             getLastKey = 40;
 
             if (getLastLabel == "院內服務") {
-                if (innerItemPosition != 11) {
+                if (innerItemPosition != 9) {
                     innerItemPosition += 5;
-                } if (innerItemPosition > 11) {
-                    innerItemPosition = 11;
+                } if (innerItemPosition > 9) {
+                    innerItemPosition = 9;
+                    $('.TableCellBig').focus();
                 }
             } else if (getLastLabel == "生活資訊") {
                 if (!(innerItemPosition > 5)) {
@@ -1244,10 +1246,8 @@
                 }
             } else if (getLastLabel == "院內服務") {
                 if (innerItemPosition != 5) {
-                    if (innerItemPosition != 10) {
-                        if (innerItemPosition != 11) {
-                            innerItemPosition += 1
-                        }
+                    if (innerItemPosition != 9) {
+                        innerItemPosition += 1
                     }
                 }
             }
@@ -1304,25 +1304,18 @@
                             isAppOpen = true;
                             break;
                         case 7:
-                            window.plugins.launcher.launch({ packageName: 'bc.extend1' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 8:
                             window.plugins.launcher.launch({ packageName: 'bc.extend.query' }, successCallback, errorCallback);
                             isAppOpen = true;
                             break;
-                        case 9:
+                        case 8:
                             window.plugins.launcher.launch({ packageName: 'bc.extend.reg' }, successCallback, errorCallback);
                             isAppOpen = true;
                             break;
-                        case 10:
-                            window.plugins.launcher.launch({ packageName: 'bc.extend.guide' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 11:
+                        case 9:
                             window.plugins.launcher.launch({ packageName: 'com.example.zyxu.question' }, successCallback, errorCallback);
                             isAppOpen = true;
                             break;
+         
                     }
 
                 }
@@ -2082,6 +2075,10 @@
                         if (innerItemPosition == innerItem) {
                             $('.TableCellBig').focus();
                             innerItemPosition = innerItem;
+                        } else if (getLastLabel == "院內服務") {
+                            if (innerItemPosition == 9) {
+                                $('.TableCellBig').focus();
+                            }
                         }
 
                     } else if (innerItemPosition == innerItem && getLastLabel == "院內服務") {
@@ -2091,8 +2088,12 @@
                     if (innerItemPosition == 1) {
                         $('.TableCellBig').first().focus();
                     }
-                } else if (getLastKey == 40 && getLastLabel == "生活資訊") { //DOWN_FOCUS
-                    $('.TableCellBig').first().focus();
+                } else if (getLastKey == 40) { //DOWN_FOCUS
+
+                    if (getLastLabel == "生活資訊") {
+                        $('.TableCellBig').first().focus();
+                    } else if (getLastLabel == "院內服務") {
+                    }
                 }
             }
         });
