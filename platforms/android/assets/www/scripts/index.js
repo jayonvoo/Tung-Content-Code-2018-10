@@ -1227,9 +1227,9 @@
             getLastKey = 37;
             if (innerItemPosition != 1) {
                 if (innerItemPosition != 6) {
-                    if (innerItemPosition != 11) {
-                        innerItemPosition -= 1;
-                    }
+                    innerItemPosition -= 1;
+                } else if (innerItemPosition == 1 || innerItemPosition == 6) {
+                    innerItemPosition = 1;
                 }
             }
         } else if (event.keyCode == 39) { //RIGHT
@@ -1315,7 +1315,7 @@
                             window.plugins.launcher.launch({ packageName: 'com.example.zyxu.question' }, successCallback, errorCallback);
                             isAppOpen = true;
                             break;
-         
+
                     }
 
                 }
@@ -2063,12 +2063,9 @@
                 var input = tabbingForward ? inputs.first() : inputs.last();
                 input.focus();
 
-                if (getLastKey == 37 && innerItemPosition == 1 ||
-                    getLastKey == 37 && innerItemPosition == 6 ||
-                    getLastKey == 37 && innerItemPosition == 11) { //LEFT_FOCUS
-
+                if (getLastKey == 37 && innerItemPosition == 1) { //LEFT_FOCUS
+                    
                     $('.TableCellBig').first().focus();
-                    innerItemPosition = 1;
 
                 } else if (getLastKey == 39) { //RIGHT_FOCUS
                     if (getLastLabel == "生活資訊") {
@@ -2093,6 +2090,9 @@
                     if (getLastLabel == "生活資訊") {
                         $('.TableCellBig').first().focus();
                     } else if (getLastLabel == "院內服務") {
+                        if (innerItemPosition == 9) {
+                            $('.TableCellBig').focus();
+                        }
                     }
                 }
             }
