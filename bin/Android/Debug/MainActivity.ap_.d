@@ -95,6 +95,7 @@ C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\im
 C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\AreaB.png \
 C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\Buy.png \
 C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\Call.png \
+C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\Content-1.png \
 C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\Content.png \
 C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\Game.png \
 C:\Users\kiyot\Desktop\Tung-Content-Code-2018-10\platforms\android\assets\www\images\Guide.png \

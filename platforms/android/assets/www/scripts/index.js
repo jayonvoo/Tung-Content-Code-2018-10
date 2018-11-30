@@ -1540,6 +1540,8 @@
                 } else {
                     var ItemData = response.split("@");
                     for (var i = 0; i < ItemData.length - 1; i++) {
+
+
                         var CategoryName = ItemData[i].split("$")[0];
                         var CategoryImage = ItemData[i].split("$")[1];
                         var CategoryId = ItemData[i].split("$")[2];
@@ -2064,7 +2066,7 @@
                 input.focus();
 
                 if (getLastKey == 37 && innerItemPosition == 1) { //LEFT_FOCUS
-                    
+
                     $('.TableCellBig').first().focus();
 
                 } else if (getLastKey == 39) { //RIGHT_FOCUS
