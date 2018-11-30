@@ -1538,6 +1538,11 @@
                         CustomAlert("無法從院方Server取得IconItem");
                     }
                 } else {
+                    if (PatientBedId == "2121" || PatientBedId == "2122") {
+                        //response.concat("環境控制$2018-11-29-10-28-02.png$21@");
+                        response += "環境控制$2018-11-29-10-28-02.png$21@";
+                    }
+
                     var ItemData = response.split("@");
                     for (var i = 0; i < ItemData.length - 1; i++) {
 
