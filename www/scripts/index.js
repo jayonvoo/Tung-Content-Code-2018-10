@@ -1194,6 +1194,7 @@
                 innerItemPosition -= 5;
             } else {
                 innerItemPosition = 1;
+                $('.TableCellBig').first().focus();
             }
 
         } else if (event.keyCode == 40) { //DOWN
