@@ -106,6 +106,7 @@
     var innerItemPosition;
     var isInnerBox;
     var isAppOpen;
+    var innerAppStore = [];
     var getLastKey;
     var getLastLabel;
     //---------------------------------------------------------------------------------------------------------------
@@ -1206,10 +1207,10 @@
             getLastKey = 40;
 
             if (getLastLabel == "院內服務") {
-                if (innerItemPosition != 9) {
+                if (innerItemPosition != 10) {
                     innerItemPosition += 5;
-                } if (innerItemPosition > 9) {
-                    innerItemPosition = 9;
+                } if (innerItemPosition > 10) {
+                    innerItemPosition = 10;
                     $('.TableCellBig').focus();
                 }
             } else if (getLastLabel == "生活資訊") {
@@ -1247,7 +1248,7 @@
                 }
             } else if (getLastLabel == "院內服務") {
                 if (innerItemPosition != 5) {
-                    if (innerItemPosition != 9) {
+                    if (innerItemPosition != 10) {
                         innerItemPosition += 1
                     }
                 }
@@ -1259,65 +1260,14 @@
 
                 //給與"OK"鍵啓動指定app
                 if (getLastLabel == "生活資訊") {
-                    switch (innerItemPosition) {
-                        case 1:
-                            window.plugins.launcher.launch({ packageName: 'com.bcbs.foodgallery' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 2:
-                            window.plugins.launcher.launch({ packageName: 'com.v8.view.add.octoreach.galleryjojogo' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 3:
-                            if (PatientBedId == '2121') {
-                                window.plugins.launcher.launch({ packageName: 'com.example.user.tung_environmental_control_2121_44' }, successCallback, errorCallback);
-                            } else if (PatientBedId == '2122') {
-                                window.plugins.launcher.launch({ packageName: 'com.example.user.tung_environmental_control_2122_44' }, successCallback, errorCallback);
-                            }
-                            isAppOpen = true;
-                            break;
-                    }
+
+                    window.plugins.launcher.launch({ packageName: innerAppStore[innerItemPosition - 1] }, successCallback, errorCallback);
+                    isAppOpen = true;
 
                 } else if (getLastLabel == "院內服務") {
-                    switch (innerItemPosition) {
-                        case 1:
-                            window.plugins.launcher.launch({ packageName: 'com.bc.teachrule' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 2:
-                            window.plugins.launcher.launch({ packageName: 'com.bc.teachintro' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 3:
-                            window.plugins.launcher.launch({ packageName: 'com.bc.teach.policy' }, successCallback, errorCallback);
-                            $isAppOpen = true;
-                            break;
-                        case 4:
-                            window.plugins.launcher.launch({ packageName: 'com.bc.teachvideo' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 5:
-                            window.plugins.launcher.launch({ packageName: 'com.bc.teachfile' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 6:
-                            window.plugins.launcher.launch({ packageName: 'bc.medicinequery.yw.v5' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 7:
-                            window.plugins.launcher.launch({ packageName: 'bc.extend.query' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 8:
-                            window.plugins.launcher.launch({ packageName: 'bc.extend.reg' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
-                        case 9:
-                            window.plugins.launcher.launch({ packageName: 'com.example.zyxu.question' }, successCallback, errorCallback);
-                            isAppOpen = true;
-                            break;
 
-                    }
+                    window.plugins.launcher.launch({ packageName: innerAppStore[innerItemPosition - 1] }, successCallback, errorCallback);
+                    isAppOpen = true;
 
                 }
             }
@@ -1361,8 +1311,8 @@
         var apPassword = "@#$28844678";
         */
 
-        var apNameInner = "VIP";
-        apName = "VIP";
+        var apNameInner = "Tung_vip";
+        apName = "Tung_vip";
         LastFineWifi = apName;
         var apPassword = "88888888";
 
@@ -2051,6 +2001,7 @@
         var rImageName = "";
         var rAPKFileName = "";
         var doCount = -1;
+        innerAppStore = [];
 
         ClearTD();
 
@@ -2081,7 +2032,7 @@
                             $('.TableCellBig').focus();
                             innerItemPosition = innerItem;
                         } else if (getLastLabel == "院內服務") {
-                            if (innerItemPosition == 9) {
+                            if (innerItemPosition == 10) {
                                 $('.TableCellBig').focus();
                             }
                         }
@@ -2098,7 +2049,7 @@
                     if (getLastLabel == "生活資訊") {
                         $('.TableCellBig').first().focus();
                     } else if (getLastLabel == "院內服務") {
-                        if (innerItemPosition == 9) {
+                        if (innerItemPosition == 10) {
                             $('.TableCellBig').focus();
                         }
                     }
@@ -2125,6 +2076,7 @@
                 rAPKFileName = ApplicationData[j].split(",")[1];
                 rPackName = ApplicationData[j].split(",")[2];
                 rImageName = ApplicationData[j].split(",")[4];
+                innerAppStore.push(rPackName);
                 //CustomAlert(rName +":" + rImageName);
                 doCount++;
 
